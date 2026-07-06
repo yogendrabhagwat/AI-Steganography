@@ -1,0 +1,174 @@
+{% extends "base.html" %} {% block title %}AI STEGANOGRAPHY – AI-Powered
+Steganography System{% endblock %} {% block content %}
+<section class="hero-section">
+  <div class="hero-bg"></div>
+
+  {% set locks = [ {'top': '10%', 'right': '15%', 'delay': '0s', 'size': 115,
+  'opacity': 1.0}, {'top': '40%', 'right': '5%', 'delay': '-2s', 'size': 75,
+  'opacity': 1.0}, {'top': '5%', 'right': '40%', 'delay': '-5s', 'size': 90,
+  'opacity': 1.0}, {'bottom': '10%', 'right': '25%', 'delay': '-7s', 'size':
+  100, 'opacity': 1.0}, {'top': '60%', 'right': '45%', 'delay': '-4s', 'size':
+  65, 'opacity': 1.0}, {'top': '25%', 'right': '30%', 'delay': '-1s', 'size':
+  130, 'opacity': 0.15} ] %} {% for lock in locks %}
+  <div
+    class="animated-lock"
+    style="
+            {% if lock.top %}top: {{ lock.top }};{% endif %}
+            {% if lock.bottom %}bottom: {{ lock.bottom }};{% endif %}
+            right: {{ lock.right }};
+            animation-delay: {{ lock.delay }};
+            {% if lock.opacity != 1.0 %}opacity: {{ lock.opacity }};{% endif %}
+        "
+  >
+    {% include "components/lock_svg.html" with context %}
+  </div>
+  {% endfor %}
+
+  <div class="hero-content">
+    <h1 class="hero-title">
+      Hide Secrets in <br />
+      <span class="gradient-text">Plain Sight</span>
+    </h1>
+
+    <p class="hero-desc">
+      Advanced AI-driven steganography with GAN-based adversarial security,
+      Reed-Solomon error correction, and AES-256 encryption. Embed text, images,
+      or 3D data into cover images or 3D models. Highly secure, visually
+      lossless, and robust against noise and compression.
+    </p>
+
+    <div class="hero-buttons">
+      {% if current_user.is_authenticated %}
+      <a href="{{ url_for('hide.hide_page') }}" class="btn primary">
+        <svg
+          width="18"
+          height="18"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <rect x="3" y="11" width="18" height="11" rx="2" />
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </svg>
+        &nbsp; Start Hiding
+      </a>
+      <a href="{{ url_for('extract.extract_page') }}" class="btn secondary">
+        <svg
+          width="18"
+          height="18"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+        &nbsp; Extract Secret
+      </a>
+      {% else %}
+      <a href="{{ url_for('auth.login') }}" class="btn primary hero-btn-auth">
+        LOGIN
+      </a>
+      <a
+        href="{{ url_for('auth.signup') }}"
+        class="btn secondary hero-btn-auth"
+      >
+        SIGN UP
+      </a>
+      {% endif %}
+    </div>
+
+    <div class="hero-features">
+      <div class="feature-chip">
+        <svg
+          width="14"
+          height="14"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <rect x="3" y="11" width="18" height="11" rx="2" />
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </svg>
+        AI-Powered · AES-256-GCM Encryption
+      </div>
+      <div class="feature-chip">
+        <svg
+          width="14"
+          height="14"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+        </svg>
+        PSNR &gt; 44 dB
+      </div>
+      <div class="feature-chip">
+        <svg
+          width="14"
+          height="14"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+        GAN Adversarial Layer
+      </div>
+      <div class="feature-chip">
+        <svg
+          width="14"
+          height="14"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path d="M12 2L2 7l10 5 10-5-10-5z" />
+          <path d="M2 17l10 5 10-5" />
+          <path d="M2 7v10" />
+          <path d="M12 12v10" />
+          <path d="M22 7v10" />
+        </svg>
+        3D File Support
+      </div>
+      <div class="feature-chip">
+        <svg
+          width="14"
+          height="14"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+          />
+        </svg>
+        Reed-Solomon ECC
+      </div>
+      <div class="feature-chip">
+        <svg
+          width="14"
+          height="14"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" y1="15" x2="12" y2="3" />
+        </svg>
+        Lossless PNG Output
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment
+venv/
+.env
+
+# Dataset & Training
+dataset/
+training/
+
+# Flask
+instance/
+
+# Database
+*.db
+
+# AI Models (only if you don't want to upload them)
+saved_models/
+*.pth
+
+# Testing
+.pytest_cache/
+
+# Temporary Files
+static/tmp/
+
+# IDE
+.vs/
+.vscode/

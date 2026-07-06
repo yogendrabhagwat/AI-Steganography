@@ -1,0 +1,116 @@
+{% extends "base.html" %} {% block title %}About – AI STEGANOGRAPHY{% endblock
+%} {% block content %}
+<div class="page-wrapper">
+  <div class="app-container about-container">
+    <div class="reveal about-header">
+      <h2 class="about-title">
+        About <span style="color: var(--neon)">AI STEGANOGRAPHY</span>
+      </h2>
+      <p class="about-subtitle">Next-Generation Multi-Modal Steganography</p>
+    </div>
+
+    <div class="glass-panel reveal about-panel">
+      <section class="about-section">
+        <p class="section-title">The Project</p>
+        <p class="about-lead">
+          AI STEGANOGRAPHY is an advanced research project focused on
+          <strong>Multi-Modal Steganography</strong>. Unlike traditional Least
+          Significant Bit (LSB) methods which are easily detectable by
+          statistical analysis, our platform leverages
+          <strong>Artificial Intelligence</strong> to embed data within cover
+          media in a way that mimics natural noise and textures.
+        </p>
+      </section>
+
+      <div class="about-grid">
+        <div>
+          <h3 class="about-feature-title">AI-Driven Security</h3>
+          <p class="about-feature-desc">
+            We use deep learning models (CNNs and GANs) to identify the most
+            redundant areas in an image or 3D model. By embedding secrets in
+            these complex regions, we ensure that the visual impact is virtually
+            zero.
+          </p>
+        </div>
+        <div>
+          <h3 class="about-feature-title">Neural Embedding</h3>
+          <p class="about-feature-desc">
+            Our neural networks learn the statistical profile of the cover
+            media. This allows the secret data to blend seamlessly into the
+            pixel/vertex structure, making it resistant to modern steganalysis
+            tools.
+          </p>
+        </div>
+      </div>
+
+      <section class="about-flow-section">
+        <p class="section-title" style="margin-bottom: 20px">
+          Project Flow (How to Use)
+        </p>
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="flow-step-number">1</div>
+            <h4 class="flow-step-title">Register &amp; Login</h4>
+            <p class="flow-step-desc">
+              Create your secure account and sign in to access your personal
+              dashboard workspace.
+            </p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-number">2</div>
+            <h4 class="flow-step-title">Choose Mode</h4>
+            <p class="flow-step-desc">
+              Select <strong>Hide</strong> to embed data inside cover media, or
+              <strong>Extract</strong> to retrieve a hidden secret.
+            </p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-number">3</div>
+            <h4 class="flow-step-title">Configure &amp; Run</h4>
+            <p class="flow-step-desc">
+              Upload cover media (Image/3D model), input the secret data, set
+              your AES password, and click run.
+            </p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-number">4</div>
+            <h4 class="flow-step-title">Download &amp; Audit</h4>
+            <p class="flow-step-desc">
+              Download your processed stego file, and track all operations
+              dynamically in your History log.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-why-box">
+        <h3 class="about-why-title">Why Choose AI STEGANOGRAPHY?</h3>
+        <ul class="about-why-list">
+          <li class="about-why-item">
+            ✅ <strong>End-to-End Encryption:</strong> Every secret is AES-256
+            encrypted before AI embedding.
+          </li>
+          <li class="about-why-item">
+            ✅ <strong>Multi-Modal Support:</strong> Hide Text, Images, or 3D
+            data within 2D / 3D covers.
+          </li>
+          <li class="about-why-item">
+            ✅ <strong>Lossless Recovery:</strong> Mathematical precision
+            ensures bit-perfect extraction.
+          </li>
+          <li class="about-why-item">
+            ✅ <strong>High Capacity:</strong> Advanced compression allows for
+            30% more data storage.
+          </li>
+        </ul>
+      </section>
+
+      <div class="about-footer">
+        <p class="about-footer-text">
+          AI STEGANOGRAPHY — Pushing the boundaries of digital secrecy.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

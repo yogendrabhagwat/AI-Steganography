@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}AI STEGANOGRAPHY{% endblock %}</title>
+    <meta
+      name="description"
+      content="{% block meta_desc %}Advanced AI-powered steganography: hide secrets in images with AES-256 encryption and GAN-based security.{% endblock %}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    {% block extra_head %}{% endblock %}
+  </head>
+
+  <body>
+    <canvas
+      id="star-canvas"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      "
+    ></canvas>
+
+    {% block flash_messages %} {% with messages =
+    get_flashed_messages(with_categories=true) %} {% if messages %}
+    <div class="flash-container">
+      {% for cat, msg in messages %}
+      <div class="flash-msg {{ cat }}">{{ msg }}</div>
+      {% endfor %}
+    </div>
+    {% endif %} {% endwith %} {% endblock %}
+
+    <nav class="navbar">
+      <div class="logo reveal">AI STEGANOGRAPHY</div>
+
+      <ul class="reveal">
+        {% if current_user.is_authenticated %}
+        <li>
+          <a href="{{ url_for('dashboard') }}" {% if request.endpoint == 'dashboard' %}class="active"{% endif %}>Home</a>
+        </li>
+        <li>
+          <a href="{{ url_for('hide.hide_page') }}" {% if request.blueprint == 'hide' %}class="active"{% endif %}>Encode</a>
+        </li>
+        <li>
+          <a href="{{ url_for('extract.extract_page') }}" {% if request.blueprint == 'extract' %}class="active"{% endif %}>Decode</a>
+        </li>
+        <li>
+          <a href="{{ url_for('history.history_page') }}" {% if request.blueprint == 'history' %}class="active"{% endif %}>History</a>
+        </li>
+        <li>
+          <a href="{{ url_for('about') }}" {% if request.endpoint == 'about' %}class="active"{% endif %}>About</a>
+        </li>
+        <li>
+          <a href="{{ url_for('contact') }}" {% if request.endpoint == 'contact' %}class="active"{% endif %}>Contact</a>
+        </li>
+        {% else %}
+        {% if request.endpoint != 'index' %}
+        <li>
+          <a href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}class="active"{% endif %}>Home</a>
+        </li>
+        {% endif %}
+        <li>
+          <a href="{{ url_for('auth.login') }}" {% if request.endpoint == 'auth.login' %}class="active"{% endif %}>Login</a>
+        </li>
+        <li>
+          <a href="{{ url_for('auth.signup') }}" {% if request.endpoint == 'auth.signup' %}class="active"{% endif %}>Sign Up</a>
+        </li>
+        <li>
+          <a href="{{ url_for('contact') }}" {% if request.endpoint == 'contact' %}class="active"{% endif %}>Contact</a>
+        </li>
+        {% endif %}
+      </ul>
+
+      <div class="reveal">
+        {% if current_user.is_authenticated %}
+        <button
+          onclick="window.location.href='{{ url_for('auth.logout') }}'"
+          style="
+            padding: 6px 15px;
+            font-size: 0.7rem;
+            border-radius: 15px;
+            background: transparent;
+            border: 1px solid var(--neon);
+            color: white;
+            cursor: pointer;
+          "
+        >
+          Logout
+        </button>
+        {% else %} {% if request.endpoint != 'index' %}
+        <button
+          onclick="window.location.href='{{ url_for('auth.login') }}'"
+          style="
+            padding: 6px 15px;
+            font-size: 0.7rem;
+            border-radius: 15px;
+            background: transparent;
+            border: 1px solid var(--neon);
+            color: white;
+            cursor: pointer;
+          "
+        >
+          Login
+        </button>
+        {% endif %} {% endif %}
+      </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <script src="{{ url_for('static', filename='js/steganography.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>

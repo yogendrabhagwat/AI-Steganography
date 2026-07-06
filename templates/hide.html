@@ -1,0 +1,395 @@
+{% extends "base.html" %} {% block title %}Hide Secret – AI STEGANOGRAPHY{%
+endblock %} {% block meta_desc %}Embed encrypted secrets into images using AI
+steganography.{% endblock %} {% block content %}
+<div class="page-wrapper">
+  <div class="app-container stego-wrapper-1000">
+    <div class="reveal stego-header">
+      <h2>Encode <span style="color: var(--neon)">(Hide)</span> Data</h2>
+    </div>
+
+    <div id="hide-form">
+      <div id="stego-alert-container" class="stego-alert-container"></div>
+      <div class="stego-grid">
+        <div class="glass-panel stego-panel-flex">
+          <p class="section-title">1. Cover Image</p>
+
+          <label class="field-label" style="margin-bottom: 8px"
+            >Cover Mode (AI Algorithm)</label
+          >
+          <div class="segment-group" style="margin-bottom: 20px">
+            <input
+              type="radio"
+              name="cover_mode"
+              id="mode-2d"
+              value="2D"
+              checked
+            />
+            <label for="mode-2d"> 2D Photo</label>
+
+            <input type="radio" name="cover_mode" id="mode-3d" value="3D" />
+            <label for="mode-3d"> 3D Enhanced</label>
+          </div>
+
+          <div class="drop-zone stego-dropzone-large" id="cover-drop-zone">
+            <div class="icon-wrapper">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="17 8 12 3 7 8" />
+                <line x1="12" y1="3" x2="12" y2="15" />
+              </svg>
+            </div>
+            <p>
+              Drop cover image or 3D file here or
+              <span class="accent-text">browse</span>
+            </p>
+            <p id="cover-instructions" class="stego-password-label">
+              Supported: PNG, JPG, BMP, WebP
+            </p>
+            <input
+              type="file"
+              id="cover-file-input"
+              accept="image/*,.obj,.npy,.npz,.bin,.ply,.stl,.glb,.fbx"
+              hidden
+            />
+          </div>
+
+          <div class="input-group hidden stego-preview-wrap" id="cover-step-2">
+            <div class="preview-container">
+              <img id="cover-preview" src="" alt="Preview" />
+              <div class="file-info">
+                <span id="cover-filename">image.png</span>
+                <button class="icon-btn" id="clear-cover" title="Remove">
+                  <svg
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-panel stego-panel-flex">
+          <p class="section-title">2. Mode &amp; Secret Type</p>
+
+          <label class="field-label" style="margin-bottom: 8px"
+            >Secret Type</label
+          >
+          <div class="segment-group" style="margin-bottom: 20px">
+            <input
+              type="radio"
+              name="secret_type"
+              id="stype-text"
+              value="text"
+              checked
+            />
+            <label for="stype-text"> Text</label>
+
+            <input
+              type="radio"
+              name="secret_type"
+              id="stype-image"
+              value="image"
+            />
+            <label for="stype-image"> Image</label>
+
+            <input type="radio" name="secret_type" id="stype-3d" value="3d" />
+            <label for="stype-3d"> 3D Data</label>
+          </div>
+
+          <div id="secret-text-area" class="stego-textarea-wrap">
+            <textarea
+              id="secret-text"
+              rows="5"
+              placeholder="Type your secret message here..."
+              class="stego-textarea"
+            ></textarea>
+          </div>
+
+          <div id="secret-image-area" class="hidden stego-area-flex">
+            <div
+              class="drop-zone stego-dropzone-secret"
+              id="secret-img-drop-zone"
+            >
+              <div class="icon-wrapper">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                  <circle cx="8.5" cy="8.5" r="1.5" />
+                  <polyline points="21 15 16 10 5 21" />
+                </svg>
+              </div>
+              <p>
+                Drop secret image here or
+                <span class="accent-text">browse</span>
+              </p>
+              <input
+                type="file"
+                id="secret-image-input"
+                accept="image/png,image/jpeg,image/jpg,image/bmp"
+                hidden
+              />
+            </div>
+
+            <div
+              class="input-group hidden stego-preview-wrap"
+              id="secret-img-step-2"
+            >
+              <div class="preview-container">
+                <img id="secret-img-preview" src="" alt="Preview" />
+                <div class="file-info">
+                  <span id="secret-img-filename">secret.png</span>
+                  <button class="icon-btn" id="clear-secret-img" title="Remove">
+                    <svg
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <line x1="18" y1="6" x2="6" y2="18" />
+                      <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="secret-3d-area" class="hidden stego-area-flex">
+            <div class="drop-zone stego-dropzone-3d" id="secret-3d-drop-zone">
+              <div class="icon-wrapper">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                  />
+                </svg>
+              </div>
+              <p>
+                Drop .npy or binary file here or
+                <span class="accent-text">browse</span>
+              </p>
+              <p class="stego-password-label" id="secret-3d-filename">
+                .npy, .bin or any binary file
+              </p>
+              <input type="file" id="secret-3d-input" hidden />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-panel stego-panel-margin">
+        <p class="section-title">3. Encrypt &amp; Embed</p>
+
+        <div class="stego-form-row">
+          <label class="field-label" for="aes-password">AES-256 Password</label>
+          <div class="stego-input-password-wrap">
+            <input
+              type="password"
+              id="aes-password"
+              placeholder="Strong password for encryption"
+              autocomplete="new-password"
+              class="stego-input-password"
+            />
+            <button
+              type="button"
+              aria-label="Toggle password visibility"
+              onclick="
+                var inp = document.getElementById('aes-password');
+                var icon = document.getElementById('eye-icon-aes');
+                if (inp.type === 'password') {
+                  inp.type = 'text';
+                  icon.innerHTML =
+                    '<path d=\'M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z\'/><circle cx=\'12\' cy=\'12\' r=\'3\'/>';
+                } else {
+                  inp.type = 'password';
+                  icon.innerHTML =
+                    '<path d=\'M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24\'/><line x1=\'1\' y1=\'1\' x2=\'23\' y2=\'23\'/>';
+                }
+              "
+              class="stego-eye-btn"
+            >
+              <svg
+                id="eye-icon-aes"
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"
+                />
+                <line x1="1" y1="1" x2="23" y2="23" />
+              </svg>
+            </button>
+          </div>
+          <div class="strength-bar-wrap">
+            <div class="strength-bar" id="aes-strength-bar"></div>
+          </div>
+          <div
+            class="strength-label stego-password-label"
+            id="aes-strength-label"
+          ></div>
+        </div>
+
+        <button class="action-btn stego-btn-hide" id="btn-hide">
+          <svg
+            width="18"
+            height="18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <rect x="3" y="11" width="18" height="11" rx="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+          <span>Hide Secret</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="hide-result" class="glass-panel stego-panel-margin hidden">
+      <div class="success-message">
+        <svg
+          width="28"
+          height="28"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+          <polyline points="22 4 12 14.01 9 11.01" />
+        </svg>
+        <span>Secret Successfully Hidden!</span>
+      </div>
+
+      <div class="stego-preview">
+        <img id="result-stego-img" src="" alt="Stego Image" />
+      </div>
+
+      <div class="metrics-strip">
+        <div class="metric-box">
+          <div class="metric-label">Cover Size</div>
+          <div
+            class="metric-value stego-metric-value-default"
+            id="metric-cover-size"
+          >
+            —
+          </div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">Secret Size</div>
+          <div
+            class="metric-value stego-metric-value-default"
+            id="metric-secret-size"
+          >
+            —
+          </div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">PSNR</div>
+          <div class="metric-value good" id="metric-psnr">—</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">SSIM</div>
+          <div class="metric-value good" id="metric-ssim">—</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">Robustness</div>
+          <div class="metric-value good" id="metric-robust">—</div>
+        </div>
+      </div>
+
+      <div class="stego-badge-wrap">
+        <span class="model-badge" id="model-badge-text">Universal Model</span>
+      </div>
+
+      <div class="btn-row stego-btn-row">
+        <a
+          id="download-stego"
+          class="action-btn success-btn stego-btn-download"
+          download="stego.png"
+        >
+          <svg
+            width="16"
+            height="16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          Download Stego PNG
+        </a>
+        <button
+          id="download-stego-3d"
+          class="action-btn success-btn stego-btn-download"
+          onclick="downloadStego3D()"
+        >
+          Download Stego 3D File
+        </button>
+        <button class="action-btn secondary" id="btn-share">
+          <svg
+            width="16"
+            height="16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <circle cx="18" cy="5" r="3" />
+            <circle cx="6" cy="12" r="3" />
+            <circle cx="18" cy="19" r="3" />
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+          </svg>
+          Share
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
